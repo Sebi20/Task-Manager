@@ -1,3 +1,25 @@
 body{
     background-color: rgb(128, 92, 128);
 }
+
+.content{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+#input-fld{
+    border-radius: 5px;
+    padding: 6px;
+    background-color: rgba(20, 20, 20, 0.5);
+    color: aliceblue;
+}
+
+#remove-btn{
+    margin-left: 20px;
+}
+
+.mainHeading{
+    text-align: center;
+    color: rgb(63, 24, 24);
+}
