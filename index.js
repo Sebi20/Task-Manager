@@ -11,6 +11,10 @@ localStorage.removeItem("Tasks"); //TODO: Continue to work on localStorage.
 // Adding a submit event listener on the search form on the page
 form.addEventListener("submit", function(event){
   event.preventDefault();
+
+  if(input.value == ""){
+    return;// return nothing if the input field is empty
+  }
   
   const label = document.createElement("label");// Creating a label element for the checkbox
   const li = document.createElement("li");// Creating a list element

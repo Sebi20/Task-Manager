@@ -1,31 +1,53 @@
 body{
-    background-color: rgb(128, 92, 128);
+    background-color: rgb(68, 62, 62);
 }
 
 .content{
     display: flex;
     justify-content: center;
     margin-top: 50px;
+    align-items: center;
 }
 
 #input-fld{
     border-radius: 5px;
-    padding: 6px;
+    padding: 10px;
+    width: 370px;
+    height: 30px;
     background-color: rgba(20, 20, 20, 0.5);
     color: aliceblue;
+    font-size: large;
 }
 
 #remove-btn{
     margin-left: 20px;
+    background-color: #86608E;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.add-btn{
+    width: 100px;
+    padding: 5px;
+    background-color: #85BB65;
+    font-size: 20px;
 }
 
 .mainHeading{
     text-align: center;
-    color: rgb(63, 24, 24);
+    color: #808000;
+    font-size: 80px;
 }
 #list{
-    display: grid;
-    place-items: center;
+    align-items: center;
     margin-top: 20px;
-    margin-right: 14%;
+    margin-left: 25%;
+    justify-content: center;
+    color: wheat;
+    font-size: 30px;
+}
+
+#list li{
+    margin-bottom: 5px;
+    list-style-type: none;
 }
