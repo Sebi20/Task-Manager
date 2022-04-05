@@ -26,6 +26,7 @@ form.addEventListener("submit", function(event){
   
   li.appendChild(checkbox);// Adding the checkbox to the list element
   li.appendChild(label);// Adding a label with the checkbox; in order to display the task that was written in the inout field
+  localStorage.setItem(label.textContent, li);
   ol.appendChild(li);// Adding the list element to the ordered list tag
   list.appendChild(ol);// Adding the ordered list tag to the div for displaying the whole thing
   input.value = "";
@@ -36,9 +37,10 @@ form.addEventListener("submit", function(event){
 })// End of eventlistener for submitting a task to the list
 
 
-removeBtn.addEventListener("click", function(){
+removeBtn.addEventListener("click", function(event){
+  event.preventDefault();
   const liTags = list.getElementsByTagName("li");// Returns an array like object all the li tags in the list div
-  console.log("Old list" + list.innerHTML);
+  //console.log("Old list" + list.innerHTML);
 
   //localStorage.removeItem('Tasks')
   /*The for loop goes through all the li tags in the list div*/
@@ -47,12 +49,15 @@ removeBtn.addEventListener("click", function(){
     /*When a checkbox is found that has a check
     it will be removed*/
     if(liTags[i].querySelector("input").checked == true){
+      localStorage.removeItem(liTags[i].querySelector("label").innerHTML);
+      //console.log(liTags[i].querySelector("label").innerHTML);
       ol.removeChild(liTags[i]);//removing the list element
+      
     }// End of the if statement
     //localStorage.setItem('Tasks', ol.innerHTML);
 
   }// End of the for loop
-  console.log("new list" + list.innerHTML); 
+  //console.log("new list" + list.innerHTML); 
 
   
 })// End of the eventListener that was on the remove button. When clicked the button removes an item on the list that is checked.
