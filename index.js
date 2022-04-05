@@ -1,3 +1,5 @@
+//TODO: There's a bug where the rendered list elements from local storage gets rendered in different orders.
+
 // Defining different elements for the page
 const list = document.querySelector("#list"); //This is the div that the list will be added to. 
 const btn = document.querySelector("button");// This holds the add task button
@@ -48,7 +50,7 @@ removeBtn.addEventListener("click", function(event){
 })
 
 function displayAfterReload(){
-  for(let i = 0; i < localStorage.length; i++){
+  for(let i = localStorage.length - 1; i >= 0; i--){
     const li = document.createElement("li");// Creating a list element
     li.innerHTML = localStorage.getItem(localStorage.key(i));
     ol.appendChild(li);
