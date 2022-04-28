@@ -38,15 +38,14 @@ form.addEventListener("submit", function(event){
 
 removeBtn.addEventListener("click", function(event){
   event.preventDefault();
-  const liTags = list.getElementsByTagName("li");// Returns an array like object all the li tags in the list div
-  
-  for(let i = 0; i < liTags.length; i++){
+  const liTags = list.querySelectorAll("li");// Returns an array like object all the li tags in the list div
 
-    if(liTags[i].querySelector("input").checked == true){
-      localStorage.removeItem(liTags[i].querySelector("label").innerHTML);
-      ol.removeChild(liTags[i]);//removing the list element
+  liTags.forEach(element => {
+    if(element.querySelector("input").checked){
+      localStorage.removeItem(element.querySelector("label").innerHTML);
+      ol.removeChild(element);//removing the list element from the ol tag
     }
-  }
+  });
 })
 
 function displayAfterReload(){
