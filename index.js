@@ -7,8 +7,10 @@ const ol = document.createElement("ol");// Creating a ordered list element
 const form = document.getElementById("form");// This holds the form to with the search field and button
 const input = document.getElementById("input-fld");// This is the input field where you add the task
 const removeBtn = document.getElementById("remove-btn");// This is the remove button that will remove all checked tasks
+const select = document.getElementById("colors");
 //-------------------------------------------------------------------------------------------------------------------------
 
+ 
 
 form.addEventListener("submit", function(event){
   event.preventDefault();
