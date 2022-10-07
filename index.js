@@ -10,11 +10,7 @@ const removeBtn = document.getElementById("remove-btn");
 const select = document.getElementById("colors");
 //const colorOptions = select.querySelectorAll("option");
 const taskNumber = document.getElementById("taskNumber");
-
-window.addEventListener('load', (event) => {
-  const liTags = list.querySelectorAll("li");
-  taskNumber.innerHTML = liTags.length;
-});
+let tasks = [];//Array to hold the tasks
 
 form.addEventListener("submit", function(event){
   event.preventDefault();
@@ -30,14 +26,18 @@ form.addEventListener("submit", function(event){
   label.textContent = input.value;
   li.appendChild(checkbox);
   li.appendChild(label);
+
+  tasks.push(li);
+  console.log(tasks);
+  console.log(JSON.stringify(tasks));
+
   
   localStorage.setItem(label.textContent, li.innerHTML);
 
   ol.appendChild(li);
   list.appendChild(ol);
   input.value = "";  
-  location.reload();
-})
+});
 
 
 removeBtn.addEventListener("click", function(event){
@@ -52,8 +52,7 @@ removeBtn.addEventListener("click", function(event){
     }
   });
   
-  location.reload();
-})
+});
 
 function displayAfterReload(){
   for(let i = localStorage.length - 1; i >= 0; i--){
