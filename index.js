@@ -1,5 +1,3 @@
-//TODO: Write better comments to improve the readablitity of the code
-
 const list = document.querySelector("#list"); 
 const btn = document.querySelector("button");
 const ol = document.createElement("ol");
@@ -8,25 +6,19 @@ const input = document.getElementById("input-fld");
 const removeBtn = document.getElementById("remove-btn");
 const select = document.getElementById("colors");
 //const colorOptions = select.querySelectorAll("option");
-
 const taskNumber = document.getElementById("taskNumber");
 let tasks = {};// Objects that hold the tasks
 
 
-
+//This checks the amount of tasks in the tasks object and assign it to the number of tasks section
 if(localStorage.getItem('tasks') == null){
   taskNumber.innerText = 0;
 }else {
   taskNumber.innerHTML = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
-
-  console.log(Object.keys(JSON.parse(localStorage.getItem('tasks'))).length);
-
 }
 
 
-
-
-
+//This adds the tasks to the list and also adds the tasks to the tasks object, which is then added to localStorage
 form.addEventListener("submit", function(event){
   event.preventDefault();
 
@@ -58,7 +50,7 @@ form.addEventListener("submit", function(event){
   taskNumber.innerHTML = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
 });
 
-
+// This removes a task from the list and also removes that same task from the tasks object stored in localStorage
 removeBtn.addEventListener("click", function(event){
   event.preventDefault();
 
@@ -80,6 +72,8 @@ removeBtn.addEventListener("click", function(event){
   taskNumber.innerHTML = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
 });
 
+
+//After reload, this will get display the tasks stored in the localStorage to the page
 function displayAfterReload(){
 
   if(localStorage.getItem('tasks') == null){
@@ -96,7 +90,5 @@ function displayAfterReload(){
 
   }
 }
-
-
 
 displayAfterReload();
