@@ -8,8 +8,24 @@ const input = document.getElementById("input-fld");
 const removeBtn = document.getElementById("remove-btn");
 const select = document.getElementById("colors");
 //const colorOptions = select.querySelectorAll("option");
+
 const taskNumber = document.getElementById("taskNumber");
 let tasks = {};// Objects that hold the tasks
+
+
+
+if(localStorage.getItem('tasks') == null){
+  taskNumber.innerText = 0;
+}else {
+  taskNumber.innerHTML = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
+
+  console.log(Object.keys(JSON.parse(localStorage.getItem('tasks'))).length);
+
+}
+
+
+
+
 
 form.addEventListener("submit", function(event){
   event.preventDefault();
@@ -39,6 +55,7 @@ form.addEventListener("submit", function(event){
   ol.appendChild(li);
   list.appendChild(ol);
   input.value = "";  
+  taskNumber.innerHTML = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
 });
 
 
@@ -59,6 +76,8 @@ removeBtn.addEventListener("click", function(event){
     localStorage.setItem("tasks", JSON.stringify(tasks));
     
   });
+
+  taskNumber.innerHTML = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
 });
 
 function displayAfterReload(){
