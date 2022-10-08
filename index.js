@@ -1,4 +1,3 @@
-//TODO: There's a bug where the rendered list elements from local storage gets rendered in different orders.
 //TODO: Write better comments to improve the readablitity of the code
 
 const list = document.querySelector("#list"); 
@@ -10,7 +9,7 @@ const removeBtn = document.getElementById("remove-btn");
 const select = document.getElementById("colors");
 //const colorOptions = select.querySelectorAll("option");
 const taskNumber = document.getElementById("taskNumber");
-let tasks = [];//Array to hold the tasks
+let tasks = {};// Objects that hold the tasks
 
 form.addEventListener("submit", function(event){
   event.preventDefault();
@@ -27,12 +26,15 @@ form.addEventListener("submit", function(event){
   li.appendChild(checkbox);
   li.appendChild(label);
 
-  tasks.push(li);
-  console.log(tasks);
-  console.log(JSON.stringify(tasks));
+  if(localStorage.getItem('tasks') == null){
+    tasks[label.textContent] = li.innerHTML;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 
-  
-  localStorage.setItem(label.textContent, li.innerHTML);
+  }else {
+    tasks = JSON.parse(localStorage.getItem('tasks'));
+    tasks[label.textContent] = li.innerHTML;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
 
   ol.appendChild(li);
   list.appendChild(ol);
@@ -47,21 +49,35 @@ removeBtn.addEventListener("click", function(event){
   
   liTags.forEach(element => {
     if(element.querySelector("input").checked){
-      localStorage.removeItem(element.querySelector("label").innerHTML);
+      tasks = JSON.parse(localStorage.getItem('tasks'));
+
+      delete tasks[element.querySelector("label").innerHTML];
+      
       ol.removeChild(element);
     }
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    
   });
-  
 });
 
 function displayAfterReload(){
-  for(let i = localStorage.length - 1; i >= 0; i--){
-    const li = document.createElement("li");// Creating a list element
-    li.innerHTML = localStorage.getItem(localStorage.key(i));
-    ol.appendChild(li);
-    list.appendChild(ol);
+
+  if(localStorage.getItem('tasks') == null){
+    return;
+  }else {
+    tasks = JSON.parse(localStorage.getItem('tasks'));
+
+    for(let i in tasks){
+      const li = document.createElement("li");// Creating a list element
+      li.innerHTML = tasks[i];
+      ol.appendChild(li);
+      list.appendChild(ol);
+    }
+
   }
 }
+
 
 
 displayAfterReload();
