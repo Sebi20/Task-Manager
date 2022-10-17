@@ -4,15 +4,31 @@ const ol = document.createElement("ol");
 const form = document.getElementById("form");
 const input = document.getElementById("input-fld");
 const removeBtn = document.getElementById("remove-btn");
+const noTaskMessage = document.getElementById("noTaskMessage");
 const select = document.getElementById("colors");
 //const colorOptions = select.querySelectorAll("option");
 const taskNumber = document.getElementById("taskNumber");
+let taskCount;
 let tasks = {};// Objects that hold the tasks
+
+function displayMessage(){
+  taskCount = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
+  taskNumber.innerHTML = taskCount;
+
+  if(taskCount == 0){
+    noTaskMessage.style.display = "flex"
+  }else{
+    noTaskMessage.style.display = "none"
+  }
+
+}
+
 
 
 //This checks the amount of tasks in the tasks object and assign it to the number of tasks section
 if(localStorage.getItem('tasks') == null){
   taskNumber.innerText = 0;
+  noTaskMessage.style.display = "flex";
 }else {
   taskNumber.innerHTML = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
 }
@@ -47,7 +63,8 @@ form.addEventListener("submit", function(event){
   ol.appendChild(li);
   list.appendChild(ol);
   input.value = "";  
-  taskNumber.innerHTML = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
+  
+  displayMessage();
 });
 
 // This removes a task from the list and also removes that same task from the tasks object stored in localStorage
@@ -69,7 +86,8 @@ removeBtn.addEventListener("click", function(event){
     
   });
 
-  taskNumber.innerHTML = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
+  displayMessage();
+  
 });
 
 
@@ -91,4 +109,5 @@ function displayAfterReload(){
   }
 }
 
+displayMessage();
 displayAfterReload();

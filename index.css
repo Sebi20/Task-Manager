@@ -4,6 +4,7 @@ body{
 
 .heading{
     color: aliceblue;
+    margin-left: 20px;
 }
 
 .mainHeading{
@@ -56,7 +57,7 @@ body{
     place-items: center;
     justify-content: center;
     margin-top: 20px;
-    margin-left: 25%;
+    margin-left: 20%;
     font-size: 30px;
 }
 
@@ -68,6 +69,13 @@ body{
 #list label{
     margin-left: 10px;
     color: aliceblue;
+}
+
+#noTaskMessage{
+    color: gray;
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
 
 
