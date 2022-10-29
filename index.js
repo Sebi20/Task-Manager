@@ -8,8 +8,9 @@ const noTaskMessage = document.getElementById("noTaskMessage");
 const select = document.getElementById("colors");
 //const colorOptions = select.querySelectorAll("option");
 const taskNumber = document.getElementById("taskNumber");
-let taskCount;
+let taskCount;// Stores the count of the task
 let tasks = {};// Objects that hold the tasks
+let date;
 
 function displayMessage(){
   taskCount = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
@@ -45,8 +46,17 @@ form.addEventListener("submit", function(event){
   const label = document.createElement("label");
   const li = document.createElement("li");
   const checkbox = document.createElement("input");
+  const span = document.createElement("span");
   checkbox.type = "checkbox";
+
+  date = new Date().toLocaleDateString("en-US");
+
+  span.textContent = date;
+  span.setAttribute("class", "taskDates");
+
+  
   label.textContent = input.value;
+  label.appendChild(span)
   li.appendChild(checkbox);
   li.appendChild(label);
 
@@ -77,7 +87,7 @@ removeBtn.addEventListener("click", function(event){
     if(element.querySelector("input").checked){
       tasks = JSON.parse(localStorage.getItem('tasks'));
 
-      delete tasks[element.querySelector("label").innerHTML];
+      delete tasks[element.querySelector("label").textContent];
       
       ol.removeChild(element);
     }
