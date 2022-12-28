@@ -6,11 +6,14 @@ const input = document.getElementById("input-fld");
 const removeBtn = document.getElementById("remove-btn");
 const noTaskMessage = document.getElementById("noTaskMessage");
 const select = document.getElementById("colors");
-//const colorOptions = select.querySelectorAll("option");
+//  const colorOptions = select.querySelectorAll("option");
 const taskNumber = document.getElementById("taskNumber");
-let taskCount;// Stores the count of the task
-let tasks = {};// Objects that hold the tasks
+let taskCount;      //  Stores the count of the task
+let tasks = {};     //  Objects that hold the tasks
 let date;
+
+
+
 
 function displayMessage(){
   taskCount = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
@@ -26,7 +29,7 @@ function displayMessage(){
 
 
 
-//This checks the amount of tasks in the tasks object and assign it to the number of tasks section
+//  This checks the amount of tasks in the tasks object and assign it to the number of tasks section
 if(localStorage.getItem('tasks') == null){
   taskNumber.innerText = 0;
   noTaskMessage.style.display = "flex";
@@ -35,8 +38,8 @@ if(localStorage.getItem('tasks') == null){
 }
 
 
-//This adds the tasks to the list and also adds the tasks to the tasks object, which is then added to localStorage
-form.addEventListener("submit", function(event){
+//  This adds the tasks to the list and also adds the tasks to the tasks object, which is then added to localStorage
+function addTask(event){
   event.preventDefault();
 
   if(input.value == ""){
@@ -46,17 +49,28 @@ form.addEventListener("submit", function(event){
   const label = document.createElement("label");
   const li = document.createElement("li");
   const checkbox = document.createElement("input");
-  const span = document.createElement("span");
+  const dateSpan = document.createElement("span");
+  const removeSpan = document.createElement("span");
+  const deleteMsg = document.createElement("span");
   checkbox.type = "checkbox";
 
   date = new Date().toLocaleDateString("en-US");
 
-  span.textContent = date;
-  span.setAttribute("class", "taskDates");
+  dateSpan.textContent = date;
+  dateSpan.setAttribute("class", "taskDates");
+
+  removeSpan.textContent = "x";
+  removeSpan.setAttribute('class', 'removeSpan');
+  //removeSpan.setAttribute('onmouseover', "deleteMsg.style.display = 'block'")
+
+  deleteMsg.textContent = 'Delete';
+  deleteMsg.setAttribute('class', 'deleteMsg');
 
   
   label.textContent = input.value;
-  label.appendChild(span)
+  label.appendChild(dateSpan);
+  label.appendChild(removeSpan);
+  label.appendChild(deleteMsg);
   li.appendChild(checkbox);
   li.appendChild(label);
 
@@ -75,10 +89,12 @@ form.addEventListener("submit", function(event){
   input.value = "";  
   
   displayMessage();
-});
+}
+
+
 
 // This removes a task from the list and also removes that same task from the tasks object stored in localStorage
-removeBtn.addEventListener("click", function(event){
+function removeTask(event){
   event.preventDefault();
 
   const liTags = list.querySelectorAll("li");
@@ -98,7 +114,10 @@ removeBtn.addEventListener("click", function(event){
 
   displayMessage();
   
-});
+}
+
+form.addEventListener("submit", addTask); //Event listener that adds the tasks
+removeBtn.addEventListener("click", removeTask); //Event listener that removes the tasks
 
 
 //After reload, this will get display the tasks stored in the localStorage to the page
@@ -121,3 +140,12 @@ function displayAfterReload(){
 
 displayMessage();
 displayAfterReload();
+
+
+// const allTheRemoveSpan = document.querySelectorAll('removeSpan');
+
+// for(const rs of allTheRemoveSpan){
+//   rs.addEventListener("onclick", function(){
+//     localStorage.removeItem()
+//   })
+// }
