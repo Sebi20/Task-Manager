@@ -8,13 +8,15 @@ const noTaskMessage = document.getElementById("noTaskMessage");
 const select = document.getElementById("colors");
 //  const colorOptions = select.querySelectorAll("option");
 const taskNumber = document.getElementById("taskNumber");
+
 let taskCount;      //  Stores the count of the task
 let tasks = {};     //  Objects that hold the tasks
 let date;
 
 
 
-
+//  This function gets the tasks out of local storage displays it when the page is refreshed
+//  If there are no tasks then the noTaskMessage will be displayed. 
 function displayMessage(){
   taskCount = Object.keys(JSON.parse(localStorage.getItem('tasks'))).length;
   taskNumber.innerHTML = taskCount;
@@ -67,6 +69,11 @@ function addTask(event){
   deleteMsg.setAttribute('class', 'deleteMsg');
 
   
+  // if(tasks != null || taskCount != 0){
+  //   if()
+  // }
+
+
   label.textContent = input.value;
   label.appendChild(dateSpan);
   label.appendChild(removeSpan);
